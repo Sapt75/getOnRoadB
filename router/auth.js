@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const path = require("path")
 
 
 require('../db/conn');
@@ -34,8 +35,21 @@ const PriceQuery = require('../model/userPriceQuery');
 
 
 
-router.get('/', (req, res) => {
-    res.send(`Hello World from the server auth`);
+router.get('/*', (req, res) => {
+    // let data = __dirname.split("\\")
+    // let dir = ""
+
+    // for (let i = 0; i < data.length; i++) {
+    //     if (i == data.length-2) {
+    //         break
+    //     }else{
+    //         dir = dir + data[i] + "\\"
+    //     }
+    // }
+    // console.log(dir)
+    res.send("HEllo")
+    // res.send(__filename)
+    // res.sendFile('index.html', { root: dir + 'frontend_New11-04-23\\build' });
 });
 
 // router.get('/form', (req, res) =>{
@@ -920,8 +934,8 @@ router.post('/price_query', async (req, res) => {
 
 })
 
-router.get('/model_car/:brand/:model', async(req, res)=>{
-    let data = await CarData.find({brand: req.params.brand, model_name: req.params.model}).select("fuel_type transmission_type seating_capacity -_id")
+router.get('/model_car/:brand/:model', async (req, res) => {
+    let data = await CarData.find({ brand: req.params.brand, model_name: req.params.model }).select("fuel_type transmission_type seating_capacity -_id")
     res.send(data)
 })
 

@@ -11,11 +11,27 @@ dotenv.config({ path: './config.env' });
 require('./db/conn');
 // const user = require('./model/userSchema');
 
+
+let data = __dirname.split("\\")
+let dir = ""
+
+for(let i=0;i<data.length;i++){
+    if(i == data.length-1){
+        break
+    }else{
+        dir = dir + data[i] + "\\"
+    }
+}
+
+console.log(dir)
+
+app.use(express.static(path.join(dir+'frontend_New11-04-23\\build', 'index.html')))
+
 app.use(express.json());
-app.use(cors());
+app.use(cors())
 app.use(require('./router/auth'));
 
-// app.use(express.static(path.join(__dirname, 'build')));
+// app.use();
 app.use(body_parser.urlencoded({ extended: true }))
 
 
